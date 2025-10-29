@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Pricing = () => {
   const plans = [
@@ -52,23 +53,33 @@ const Pricing = () => {
         <div className="absolute inset-0 grid-background opacity-30" />
         
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4 animate-fade-in">
+          <motion.div 
+            className="text-center mb-16 space-y-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h1 className="text-5xl lg:text-6xl font-bold">
               Choose Your Plan
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Select the perfect plan for your event ticketing needs
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`gradient-border p-8 space-y-6 hover:scale-105 transition-all duration-300 animate-fade-in ${
+                className={`gradient-border p-8 space-y-6 ${
                   plan.popular ? "ring-2 ring-primary" : ""
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -10 }}
               >
                 {plan.popular && (
                   <div className="text-primary text-sm font-bold text-center">
@@ -87,10 +98,17 @@ const Pricing = () => {
 
                 <ul className="space-y-3">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3">
+                    <motion.li 
+                      key={i} 
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 + i * 0.05 }}
+                    >
                       <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
 
@@ -101,7 +119,7 @@ const Pricing = () => {
                 >
                   Get Started
                 </Button>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

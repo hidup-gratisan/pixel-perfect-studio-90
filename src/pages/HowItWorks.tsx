@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Ticket, Wallet, Shield, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HowItWorks = () => {
   const steps = [
@@ -34,28 +35,42 @@ const HowItWorks = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
         
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20 space-y-6 animate-fade-in">
+          <motion.div 
+            className="text-center mb-20 space-y-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h1 className="text-5xl lg:text-6xl font-bold">
               How It Works
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Creating and managing blockchain-based event tickets is simple with intic.id
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="gradient-border p-8 space-y-4 hover:scale-105 transition-transform duration-300 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.15}s` }}
+                  className="gradient-border p-8 space-y-4"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  whileHover={{ scale: 1.05 }}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <motion.div 
+                      className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <Icon className="w-6 h-6 text-primary" />
-                    </div>
+                    </motion.div>
                     <div className="text-4xl font-bold text-primary/20">
                       {String(index + 1).padStart(2, "0")}
                     </div>
@@ -65,16 +80,22 @@ const HowItWorks = () => {
                   <p className="text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
-          <div className="text-center animate-fade-in" style={{ animationDelay: "0.6s" }}>
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             <Button variant="hero" size="lg" className="text-lg px-12 py-6 h-auto">
               Start Creating Events
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
